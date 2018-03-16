@@ -1,9 +1,30 @@
 import React, { Component } from "react";
+import { noop } from "./utils";
 
-class SendButton extends Component {
-	render() {
-		return <button>Send</button>;
-	}
+type Props = {
+    onSubmit: Function,
+    disabled: boolean
+};
+
+class SendButton extends Component<Props> {
+    static defaultProps = {
+        onSubmit: noop,
+        disabled: false
+    };
+
+    render() {
+        return (
+            <button
+                onClick={this.props.onSubmit}
+                disabled={this.props.disabled}
+                ref={inst => {
+                    this.button = inst
+                }}
+            >
+                Send
+            </button>
+        );
+    }
 }
 
 export default SendButton;

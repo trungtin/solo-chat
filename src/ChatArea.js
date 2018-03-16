@@ -1,9 +1,42 @@
 import React, { Component } from "react";
+import { formatDate } from "./utils";
 
-class ChatArea extends Component {
-	render() {
-		return <div className="chatArea" />;
-	}
+import './ChatArea.css'
+
+type Message = {
+    text: String,
+    date: Date
+};
+
+type Props = {
+    messages: Array<Message>
+};
+
+class ChatArea extends Component<Props> {
+    static defaultProps = {
+        messages: []
+    };
+
+    renderMessage = (message: Message) => {
+        const { text, date, url } = message;
+        const dateText = date ? formatDate(date) : "";
+        return (
+            <div className="chatArea__message">
+                <p>{url ? <a href={url}>{text}</a> : text}</p>
+                <div className="chatArea__messageTimeStamp">
+                    <span>{dateText}</span>
+                </div>
+            </div>
+        );
+    };
+
+    render() {
+        return (
+            <div className="chatArea__container">
+                {this.props.messages.map(this.renderMessage)}
+            </div>
+        );
+    }
 }
 
 export default ChatArea;
