@@ -101,7 +101,12 @@ class App extends Component {
     render() {
         return (
             <div className="app">
-                <ChatArea messages={this.state.messages} />
+                <ChatArea
+                    messages={this.state.messages}
+                    ref={inst => {
+                        this.chatArea = inst;
+                    }}
+                />
                 <MessageBar
                     onSendText={this.onSendText}
                     closed={this.state.closed}

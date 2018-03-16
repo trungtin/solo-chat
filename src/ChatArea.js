@@ -17,11 +17,11 @@ class ChatArea extends Component<Props> {
         messages: []
     };
 
-    renderMessage = (message: Message) => {
+    renderMessage = (message: Message, index: Number) => {
         const { text, date, url } = message;
         const dateText = date ? formatDate(date) : "";
         return (
-            <div className="chatArea__message">
+            <div className="chatArea__message" key={index}>
                 <p>{url ? <a href={url}>{text}</a> : text}</p>
                 <div className="chatArea__messageTimeStamp">
                     <span>{dateText}</span>
